@@ -46,16 +46,7 @@ print(multiplication.multiply())
 let division = Calculator(firstNumber: 6, secondNumber: 4)
 print(division.divide())
 
-//test
-//브랜치 나뉘는지 테스트
-=======
-
-//branch test
-// 머지 테스트
-
->>>>>>> feat-test
-
-// 오류 테스트
+//다시
 
 
 
