@@ -47,7 +47,9 @@ let division = Calculator(firstNumber: 6, secondNumber: 4)
 print(division.divide())
 
 //test
+
 //branch test
+// 머지 테스트
 
 
 
