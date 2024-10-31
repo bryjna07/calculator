@@ -37,6 +37,9 @@ class Calculator {
             return nil
         }
         return num1 / num2
+        // 나머지 연산자 추가
+    case "%" :
+        return num1 % num2
     default:
         print("잘못된 연산자 입니다.")
         return nil
