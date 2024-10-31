@@ -1,7 +1,8 @@
 # 계산기 구현 과제
 ### [과제 TIL](https://yjuni22.tistory.com/30)
 ## < Lv 1 > 연산 가능한 클래스 만들기
-Calculator 클래스를 생성하고 각각 연산의 메서드 구현
+
+<span style="color:blue">Calculator 클래스를 생성하고 각각 연산의 메서드 구현</span>
 </br></br>
 1. 더하기, 빼기, 나누기, 곱하기 연산을 수행할 수 있는 Calculator 클래스를 만들기</br>
 2. 생성한 클래스를 이용하여 연산을 진행하고 출력하기</br>
