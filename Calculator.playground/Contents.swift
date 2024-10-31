@@ -51,15 +51,49 @@ class Calculator {
 //다시, 이 브랜치로 작업
 //switch문과 opertor 활용해보기
 
-//let calculator = Calculator(num1: 6, num2: 4, opp: "+")
-//if let calculator = calculator.calculate(opp: "+", num1: 6, num2: 4) {
-//    print(calculator)
-//}
-//let testNumber = Calculator(num1: 4, num2: 0, opp: "/")
-//if let testNumber = testNumber.calculate(opp: "/", num1: 4, num2: 0) {
-//    print(testNumber)
-//}
 let calculator = Calculator(4, 6, "+")
 if let addfuntion = calculator.calculate(4, 6, "+") {
     print(addfuntion)
+}
+
+let oryu = Calculator(5, 4, "오류")
+if let oryNamurge = oryu.calculate(5, 4, "오류") {
+    print(oryu)
+}
+
+class AddOperation {
+    
+    func calculate(_ num1: Double, _ num2: Double, _ opp: String) -> Double {
+        var opp = "+"
+        return num1 + num2
+    }
+}
+
+let addTest = Calculator(4, 6, "+")
+if let addfuntion = addTest.calculate(4, 6, "+") {
+    print(addfuntion)
+}
+
+class SubstactionOperation {
+    func calculate(_ num1: Double, _ num2: Double, _ opp: String) -> Double {
+        var opp = "-"
+        return num1 - num2
+    }
+}
+
+class MultiplyOperation {
+    func calculate(_ num1: Double, _ num2: Double, _ opp: String) -> Double {
+        var opp = "*"
+        return num1 * num2
+    }
+}
+
+class DivideOperation {
+    func calculate(_ num1: Double, _ num2: Double, _ opp: String) -> Double? {
+        guard num2 != 0 else {
+            print("0으로 나눌 수 없습니다.")
+            return nil
+        }
+        return num1 / num2
+    }
 }
