@@ -4,15 +4,17 @@
 
 
 class Calculator {
-     // Todo : 내부 구현하기
-    var num1: Double
-    var num2: Double
-    var opp: String
+    // 연산 클래스 추가
+    var addOperation: AddOperation
+    var subtractOperation: SubtractOperation
+    var multiplyOperation: MultiplyOperation
+    var divideOperation: DivideOperation
     
-    init(_ num1: Double, _ num2: Double, _ opp: String) {
-        self.num1 = num1
-        self.num2 = num2
-        self.opp = opp
+    init() {
+        addOperation = AddOperation()
+        subtractOperation = SubtractOperation()
+        multiplyOperation = MultiplyOperation()
+        divideOperation = DivideOperation()
     }
     
     func calculate(_ num1: Double, _ num2: Double, _ opp: String) -> Double? {
@@ -51,18 +53,18 @@ class Calculator {
 //다시, 이 브랜치로 작업
 //switch문과 opertor 활용해보기
 
-let calculator = Calculator(4, 6, "+")
+let calculator = Calculator()
 if let addfuntion = calculator.calculate(4, 6, "+") {
     print(addfuntion)
 }
 // 잘못된 연산자 테스트
-let oryu = Calculator(5, 4, "오류")
+let oryu = Calculator()
 if let oryNamurge = oryu.calculate(5, 4, "오류") {
     print(oryu)
 }
     
 // 0으로 나눌 시 테스트
-let zeroTest = Calculator(5, 0, "/")
+let zeroTest = Calculator()
 if let zeroResult = zeroTest.calculate(5, 0, "/") {
     print(zeroResult)
 }
@@ -75,12 +77,12 @@ class AddOperation {
     }
 }
 
-let addTest = Calculator(4, 6, "+")
+let addTest = Calculator()
 if let addfuntion = addTest.calculate(4, 6, "+") {
     print(addfuntion)
 }
 
-class SubstactionOperation {
+class SubtractOperation {
     func calculate(_ num1: Double, _ num2: Double, _ opp: String) -> Double {
         var opp = "-"
         return num1 - num2
@@ -102,4 +104,11 @@ class DivideOperation {
         }
         return num1 / num2
     }
+}
+
+let addTest1 = Calculator().addOperation.calculate(7, 3, "+")
+print(addTest1)
+
+if let divideTest = Calculator().divideOperation.calculate(4, 2, "/") {
+    print(divideTest)
 }
