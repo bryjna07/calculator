@@ -55,14 +55,20 @@ let calculator = Calculator(4, 6, "+")
 if let addfuntion = calculator.calculate(4, 6, "+") {
     print(addfuntion)
 }
-
+// 잘못된 연산자 테스트
 let oryu = Calculator(5, 4, "오류")
 if let oryNamurge = oryu.calculate(5, 4, "오류") {
     print(oryu)
 }
-
-class AddOperation {
     
+// 0으로 나눌 시 테스트
+let zeroTest = Calculator(5, 0, "/")
+if let zeroResult = zeroTest.calculate(5, 0, "/") {
+    print(zeroResult)
+}
+    
+// 각각의 연산 클래스 생성
+class AddOperation {
     func calculate(_ num1: Double, _ num2: Double, _ opp: String) -> Double {
         var opp = "+"
         return num1 + num2
