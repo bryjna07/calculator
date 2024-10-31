@@ -5,33 +5,27 @@
 
 class Calculator {
     // 연산 클래스 추가
-    var addOperation: AddOperation
-    var subtractOperation: SubtractOperation
-    var multiplyOperation: MultiplyOperation
-    var divideOperation: DivideOperation
+    let addOperation = AddOperation()
+    let subtractOperation = SubtractOperation()
+    let multiplyOperation = MultiplyOperation()
+    let divideOperation = DivideOperation()
     
-    init() {
-        addOperation = AddOperation()
-        subtractOperation = SubtractOperation()
-        multiplyOperation = MultiplyOperation()
-        divideOperation = DivideOperation()
-    }
     
     func calculate(_ num1: Double, _ num2: Double, _ opp: String) -> Double? {
     switch opp {
-            // 더하기
+    // 더하기
         case "+" :
             return num1 + num2
         
-            //빼기
+    //빼기
         case "-" :
             return num1 - num2
             
-            //곱하기
+    //곱하기
         case "*" :
             return num1 * num2
             
-            //나누기
+    //나누기
         case "/" :
         // 0으로 나누기 불가 -> num2 0 일 때 설정
         guard num2 != 0 else {
@@ -43,7 +37,7 @@ class Calculator {
     case "%" :
         return num1.truncatingRemainder(dividingBy: num2)
     default:
-        print("잘못된 연산자 입니다.")
+        print("잘못된 연산자 입니다.")  // 옵셔널로 반환되기 때문에 안내멘트 작성
         return nil
        
         }
@@ -57,12 +51,13 @@ let calculator = Calculator()
 if let addfuntion = calculator.calculate(4, 6, "+") {
     print(addfuntion)
 }
+
 // 잘못된 연산자 테스트
 let oryu = Calculator()
 if let oryNamurge = oryu.calculate(5, 4, "오류") {
     print(oryu)
 }
-    
+
 // 0으로 나눌 시 테스트
 let zeroTest = Calculator()
 if let zeroResult = zeroTest.calculate(5, 0, "/") {
@@ -75,11 +70,6 @@ class AddOperation {
         var opp = "+"
         return num1 + num2
     }
-}
-
-let addTest = Calculator()
-if let addfuntion = addTest.calculate(4, 6, "+") {
-    print(addfuntion)
 }
 
 class SubtractOperation {
@@ -105,10 +95,13 @@ class DivideOperation {
         return num1 / num2
     }
 }
-
+    // 테스트
 let addTest1 = Calculator().addOperation.calculate(7, 3, "+")
 print(addTest1)
 
 if let divideTest = Calculator().divideOperation.calculate(4, 2, "/") {
     print(divideTest)
 }
+
+let test4 = Calculator().multiplyOperation.calculate(11, 2, "*")
+print(test4)
