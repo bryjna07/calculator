@@ -8,102 +8,30 @@ enum CalculatorError: Error {
     case invalidOperator
 }
 
-class Calculator {
-    // 연산 클래스 추가
-    let addOperation = AddOperation()
-    let subtractOperation = SubtractOperation()
-    let multiplyOperation = MultiplyOperation()
-    let divideOperation = DivideOperation()
-    
-    
-    func calculate(_ num1: Double, _ num2: Double, _ opp: String) -> Double {
-    switch opp {
-    // 더하기
-        case "+" :
-            return num1 + num2
-        
-    //빼기
-        case "-" :
-            return num1 - num2
-            
-    //곱하기
-        case "*" :
-            return num1 * num2
-            
-    //나누기
-        case "/" :
-        // 0으로 나누기 불가 -> num2 0 일 때 설정
-        guard num2 != 0 else {
-          //  print("0으로 나눌 수 없습니다.")     ---> do-try-catch 에러처리 사용
-            throw CalculatorError.divideByZero
-//            return nil
-        }
-        return num1 / num2
-        // 나머지 연산자 추가
-    case "%" :
-        return num1.truncatingRemainder(dividingBy: num2)
-    default:
-//        print("잘못된 연산자 입니다.")  // 옵셔널로 반환되기 때문에 안내멘트 작성
-//        return nil
-        throw CalculatorError.invalidOperator
-        }
-}
-    
-//다시, 이 브랜치로 작업
-//switch문과 opertor 활용해보기
-    
-    do {
-        let result = try calculator.calculate(4, 6, "+")
-        print("Result:\(result)")
-    } catch CalculatorError.divideByZero {
-        print("0으로 나눌 수 없습니다.")
-    } catch CalculatorError.invalidOperator {
-        print("잘못된 연산자 입니다.")
-    } catch {
-        print("알 수 없는 에러가 발생했습니다.")
-    }
-
-let calculator = Calculator()
-if let addfuntion = calculator.calculate(4, 6, "+") {
-    print(addfuntion)
-}
-
-// 잘못된 연산자 테스트
-let oryu = Calculator()
-if let oryNamurge = oryu.calculate(5, 4, "오류") {
-    print(oryu)
-}
-
-// 0으로 나눌 시 테스트
-let zeroTest = Calculator()
-if let zeroResult = zeroTest.calculate(5, 0, "/") {
-    print(zeroResult)
-}
-    
 // 각각의 연산 클래스 생성
 class AddOperation {
-    func calculate(_ num1: Double, _ num2: Double, _ opp: String) -> Double {
+    func calculate(_ num1: Double, _ num2: Double) -> Double {
 //        var opp = "+"             없어도됨
         return num1 + num2
     }
 }
 
 class SubtractOperation {
-    func calculate(_ num1: Double, _ num2: Double, _ opp: String) -> Double {
+    func calculate(_ num1: Double, _ num2: Double) -> Double {
 //        var opp = "-"
         return num1 - num2
     }
 }
 
 class MultiplyOperation {
-    func calculate(_ num1: Double, _ num2: Double, _ opp: String) -> Double {
+    func calculate(_ num1: Double, _ num2: Double) -> Double {
 //        var opp = "*"
         return num1 * num2
     }
 }
 
 class DivideOperation {
-    func calculate(_ num1: Double, _ num2: Double, _ opp: String) -> Double? {
+    func calculate(_ num1: Double, _ num2: Double) throws -> Double {
         guard num2 != 0 else {
             throw CalculatorError.divideByZero
 //            print("0으로 나눌 수 없습니다.")
@@ -112,13 +40,89 @@ class DivideOperation {
         return num1 / num2
     }
 }
-    // 테스트
-let addTest1 = Calculator().addOperation.calculate(7, 3, "+")
-print(addTest1)
 
-if let divideTest = Calculator().divideOperation.calculate(4, 2, "/") {
-    print(divideTest)
+
+class Calculator {
+    // 연산 클래스 추가
+    let addOperation = AddOperation()
+    let subtractOperation = SubtractOperation()
+    let multiplyOperation = MultiplyOperation()
+    let divideOperation = DivideOperation()
+    
+    
+    func calculate(_ num1: Double, _ num2: Double, _ opp: String) throws -> Double {
+        switch opp {
+            // 더하기
+        case "+" :
+            // return num1 + num2
+            return addOperation.calculate(num1, num2)
+            
+            //빼기
+        case "-" :
+            return subtractOperation.calculate(num1, num2)
+            
+            //곱하기
+        case "*" :
+            return multiplyOperation.calculate(num1, num2)
+            
+            //나누기
+        case "/" :
+            return try divideOperation.calculate(num1, num2)
+            // 0으로 나누기 불가 -> num2 0 일 때 설정
+            //        guard num2 != 0 else {
+            //          //  print("0으로 나눌 수 없습니다.")     ---> do-try-catch 에러처리 사용
+            //            throw CalculatorError.divideByZero
+            ////            return nil
+            //        }
+            //        return num1 / num2
+            // 나머지 연산자 추가
+        case "%" :
+            return num1.truncatingRemainder(dividingBy: num2)
+        default:
+            //        print("잘못된 연산자 입니다.")  // 옵셔널로 반환되기 때문에 안내멘트 작성
+            //        return nil
+            throw CalculatorError.invalidOperator
+        }
+    }
+}
+// 예외처리 예제
+    let calculator = Calculator()
+    
+    do {
+        let result = try calculator.calculate(4, 6, "+")
+        print("\(result)입니다.")
+    } catch CalculatorError.divideByZero {
+        print("0으로 나눌 수 없습니다.")
+    } catch CalculatorError.invalidOperator {
+        print("잘못된 연산자 입니다.")
+    } catch {
+        print("알 수 없는 에러가 발생했습니다.")
+    }
+
+// 잘못된 연산자 테스트
+do {
+    let invalidResult = try calculator.calculate(5, 4, "오류")
+    print("Result: \(invalidResult)")
+} catch CalculatorError.divideByZero {
+    print("0으로 나눌 수 없습니다.")
+} catch CalculatorError.invalidOperator {
+    print("잘못된 연산자 입니다.")
+} catch {
+    print("알 수 없는 에러가 발생했습니다.")
 }
 
-let test4 = Calculator().multiplyOperation.calculate(11, 2, "*")
-print(test4)
+// 0으로 나누기 테스트
+do {
+    let zeroDivisionResult = try calculator.calculate(5, 0, "/")
+    print("Result: \(zeroDivisionResult)")
+} catch CalculatorError.divideByZero {
+    print("0으로 나눌 수 없습니다.")
+} catch CalculatorError.invalidOperator {
+    print("잘못된 연산자 입니다.")
+} catch {
+    print("알 수 없는 에러가 발생했습니다.")
+}
+
+
+
+    
