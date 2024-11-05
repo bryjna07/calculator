@@ -11,21 +11,18 @@ enum CalculatorError: Error {
 // 각각의 연산 클래스 생성
 class AddOperation {
     func calculate(_ num1: Double, _ num2: Double) -> Double {
-//        var opp = "+"             없어도됨
         return num1 + num2
     }
 }
 
 class SubtractOperation {
     func calculate(_ num1: Double, _ num2: Double) -> Double {
-//        var opp = "-"
         return num1 - num2
     }
 }
 
 class MultiplyOperation {
     func calculate(_ num1: Double, _ num2: Double) -> Double {
-//        var opp = "*"
         return num1 * num2
     }
 }
@@ -34,8 +31,6 @@ class DivideOperation {
     func calculate(_ num1: Double, _ num2: Double) throws -> Double {
         guard num2 != 0 else {
             throw CalculatorError.divideByZero
-//            print("0으로 나눌 수 없습니다.")
-//            return nil
         }
         return num1 / num2
     }
@@ -54,7 +49,6 @@ class Calculator {
         switch opp {
             // 더하기
         case "+" :
-            // return num1 + num2
             return addOperation.calculate(num1, num2)
             
             //빼기
@@ -68,19 +62,10 @@ class Calculator {
             //나누기
         case "/" :
             return try divideOperation.calculate(num1, num2)
-            // 0으로 나누기 불가 -> num2 0 일 때 설정
-            //        guard num2 != 0 else {
-            //          //  print("0으로 나눌 수 없습니다.")     ---> do-try-catch 에러처리 사용
-            //            throw CalculatorError.divideByZero
-            ////            return nil
-            //        }
-            //        return num1 / num2
-            // 나머지 연산자 추가
+            //나머지
         case "%" :
             return num1.truncatingRemainder(dividingBy: num2)
         default:
-            //        print("잘못된 연산자 입니다.")  // 옵셔널로 반환되기 때문에 안내멘트 작성
-            //        return nil
             throw CalculatorError.invalidOperator
         }
     }
